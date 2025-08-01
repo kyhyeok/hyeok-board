@@ -34,15 +34,10 @@
 | **프레임워크** | Spring Boot | 3.3.2 |
 | **빌드 도구** | Gradle | 8.0+  |
 | **데이터베이스** | MySQL | 8.0+  |
-| **파일 처리** | Apache Commons CSV | -     |
-| **JSON 처리** | Jackson | -     |
 | **코드 간소화** | Lombok | -     |
 
 ## Microservice Architecture
 - 6개의 마이크로 서비스와 공통 서비스
-
-### Common
-- snowFlask를 활용한 
 
 ## MSA 서비스
 | 구분           | 기술    |
