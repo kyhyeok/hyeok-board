@@ -30,8 +30,8 @@ offset 1499970;
 -- Covering Index를 활용하여 게시글 목록 조회 --
 select *
 from (select article_id
-      from article
-      where board_id = 1
-      order by article_id desc limit 30
-      offset 1499970) t
-         left join article on t.article_id = article.article_id;
+    from article
+    where board_id = 1
+    order by article_id desc limit 30
+    offset 1499970) t
+left join article on t.article_id = article.article_id;
