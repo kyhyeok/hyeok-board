@@ -39,12 +39,12 @@ public record CommentController(
     }
 
     @GetMapping("/v1/comments/infinite-scroll")
-    public List<CommentResponse> readAll(
+    public List<CommentResponse> readAllInfiniteScroll(
             @RequestParam("articleId") Long articleId,
             @RequestParam(value = "lastParentCommentId", required = false) Long lastParentCommentId,
             @RequestParam(value = "lastCommentId", required = false) Long lastCommentId,
             @RequestParam("pageSize") Long pageSize
     ) {
-        return commentService.readAll(articleId, lastParentCommentId, lastCommentId, pageSize);
+        return commentService.readAllInfiniteScroll(articleId, lastParentCommentId, lastCommentId, pageSize);
     }
 }

@@ -1,15 +1,17 @@
 package hyeok.board.comment.service;
 
-import hyeok.board.comment.entity.Comment;
 import hyeok.board.comment.entity.CommentPath;
 import hyeok.board.comment.entity.CommentV2;
 import hyeok.board.comment.repository.CommentRepositoryV2;
 import hyeok.board.comment.service.request.CommentCreateRequestV2;
+import hyeok.board.comment.service.response.CommentPageResponseV2;
 import hyeok.board.comment.service.response.CommentResponseV2;
 import hyeok.board.common.snowflake.Snowflake;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static java.util.function.Predicate.not;
 
@@ -62,15 +64,15 @@ public class CommentServiceV2 {
     @Transactional
     public void delete(Long commentId) {
         commentRepository
-            .findById(commentId)
-            .filter(not(CommentV2::getDeleted))
-            .ifPresent(comment -> {
-                if (hasChildren(comment)) {
-                    comment.delete();
-                } else {
-                    delete(comment);
-                }
-            });
+                .findById(commentId)
+                .filter(not(CommentV2::getDeleted))
+                .ifPresent(comment -> {
+                    if (hasChildren(comment)) {
+                        comment.delete();
+                    } else {
+                        delete(comment);
+                    }
+                });
     }
 
     private boolean hasChildren(CommentV2 comment) {
@@ -89,4 +91,26 @@ public class CommentServiceV2 {
                     .ifPresent(this::delete);
         }
     }
+
+    public CommentPageResponseV2 readAll(Long articleId, Long page, Long pageSize) {
+        List<CommentResponseV2> commentResponses = commentRepository.findAll(articleId, (page - 1) * pageSize, pageSize)
+                .stream()
+                .map(CommentResponseV2::from)
+                .toList();
+
+        Long count = commentRepository.count(articleId, PageLimitCalculator.calculatePageLimit(page, pageSize, 10L));
+
+        return CommentPageResponseV2.of(commentResponses, count);
+    }
+
+    public List<CommentResponseV2> readAllInfiniteScroll(Long articleId, String lastPath, Long pageSize) {
+        List<CommentV2> comments = lastPath == null ?
+                commentRepository.findAllInfiniteScroll(articleId, pageSize) :
+                commentRepository.findAllInfiniteScroll(articleId, lastPath, pageSize);
+
+        return comments.stream()
+                .map(CommentResponseV2::from)
+                .toList();
+    }
+
 }

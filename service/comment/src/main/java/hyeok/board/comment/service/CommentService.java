@@ -95,7 +95,7 @@ public class CommentService {
         return CommentPageResponse.of(comments, count);
     }
 
-    public List<CommentResponse> readAll(Long articleId, Long lastParentCommentId, Long lastCommentId, Long limit) {
+    public List<CommentResponse> readAllInfiniteScroll(Long articleId, Long lastParentCommentId, Long lastCommentId, Long limit) {
         List<Comment> comments = lastParentCommentId == null || lastCommentId == null ?
                 commentRepository.findAllInfiniteScroll(articleId, limit) :
                 commentRepository.findAllInfiniteScroll(articleId, lastParentCommentId, lastCommentId ,limit);
