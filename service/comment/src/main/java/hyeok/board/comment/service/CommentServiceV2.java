@@ -1,7 +1,9 @@
 package hyeok.board.comment.service;
 
+import hyeok.board.comment.entity.ArticleCommentCount;
 import hyeok.board.comment.entity.CommentPath;
 import hyeok.board.comment.entity.CommentV2;
+import hyeok.board.comment.repository.ArticleCommentCountRepository;
 import hyeok.board.comment.repository.CommentRepositoryV2;
 import hyeok.board.comment.service.request.CommentCreateRequestV2;
 import hyeok.board.comment.service.response.CommentPageResponseV2;
@@ -22,6 +24,8 @@ public class CommentServiceV2 {
 
     private final CommentRepositoryV2 commentRepository;
 
+    private final ArticleCommentCountRepository articleCommentCountRepository;
+
     @Transactional
     public CommentResponseV2 create(CommentCreateRequestV2 createRequest) {
         CommentV2 parent = findParent(createRequest);
@@ -39,6 +43,14 @@ public class CommentServiceV2 {
                 createRequest.writerId(),
                 parentCommentPath.createChildCommentPath(descendantsTopPath)
         );
+
+        int result = articleCommentCountRepository.increase(createRequest.articleId());
+
+        if (result == 0) {
+            articleCommentCountRepository.save(
+                    ArticleCommentCount.init(createRequest.articleId(), 1L)
+            );
+        }
 
         CommentV2 comment = commentRepository.save(commentV2);
 
@@ -84,6 +96,7 @@ public class CommentServiceV2 {
 
     private void delete(CommentV2 comment) {
         commentRepository.delete(comment);
+        articleCommentCountRepository.decrease(comment.getArticleId());
         if (!comment.isRoot()) {
             commentRepository.findByPath(comment.getCommentPath().getParentPath())
                     .filter(CommentV2::getDeleted)
@@ -111,6 +124,12 @@ public class CommentServiceV2 {
         return comments.stream()
                 .map(CommentResponseV2::from)
                 .toList();
+    }
+
+    public Long count(Long articleId) {
+        return articleCommentCountRepository.findById(articleId)
+                .map(ArticleCommentCount::getCommentCount)
+                .orElse(0L);
     }
 
 }
