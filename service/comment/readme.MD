@@ -45,3 +45,11 @@
 
 ### Backawrd index scan
 - 인덱스를 역순으로 스캔하는 것으로 인덱스 트리 leaf node 간에 연결된 양방향 포인터를 활용한다
+
+
+
+## 댓글 수 테이블 (article_comment_count)
+| 컬럼명           | 데이터 타입     | 설명 / 제약조건              |
+|---------------|---------------|------------------------|
+| article_id    | BIGINT        | Primary Key(Shard Key) |
+| comment_count | BIGINT        | 댓글 수                   |

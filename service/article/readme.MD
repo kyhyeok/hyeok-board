@@ -40,3 +40,10 @@
 ### select * from (  select article_id from article where board_id = 1 order by article_id desc limit 30 offset 8999970 ) t left join article on t.article_id = article.article_id;
 - 300,000번 페이지를 조회한다고 가정한 경우에는 테이블을 분리하는 방법도 있다.
   - 하지만 300,000번 페이지를 조회하는 것이 정상적일 사용자일까?를 생각했을 때 정책적으로 풀어내거나 텍스트 검색 기능을 활용하는 방법도 있다.
+
+
+## 게시굴 수 테이블 (board_article_count)
+| 컬럼명           | 데이터 타입     | 설명 / 제약조건              |
+|---------------|---------------|------------------------|
+| board_id      | BIGINT        | Primary Key(Shard Key) |
+| article_count | BIGINT        | 게시글 수                 |

@@ -18,9 +18,6 @@ create table article_like_count (
 
 
 
-
-
-
 -- Lock test
 
 -- 터미널 1

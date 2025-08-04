@@ -42,3 +42,9 @@ WHERE table_schema = 'comment' and table_name = 'comment_v2' and column_name = '
 
 -- 댓글 목록 조회 - 무한 dpeth
 
+
+-- 댓글 수 테이블
+create table article_comment_count (
+    article_id bigint not null primary key,
+    comment_count bigint not null
+);
