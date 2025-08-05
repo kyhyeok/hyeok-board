@@ -12,6 +12,17 @@
 | deleted           | BOOL          | 삭제여부              |
 | created_at        | DATETIME      | 생성 시간             |
 
+## 게시글 테이블 (comment_v2)
+| 컬럼명        | 데이터 타입        | 설명 / 제약조건         |
+|------------|---------------|-------------------|
+| comment_id | BIGINT        | Primary Key       |
+| content    | varchar(3000) | 내용                |
+| article_id | BIGINT        | 게시판 ID(Shard Key) |
+| path       | varchar(25)   | 무한 뎁스             |
+| writer_id  | BIGINT        | 작성자 ID            |
+| deleted    | BOOL          | 삭제여부              |
+| created_at | DATETIME      | 생성 시간             |
+
 - 계층형 댓글에서는 계층 관계를 알아야하므로, 사윙 댓글의 참조 키고 필요하여 상위 댓글 ID(parent_comment_id)를 가진다
 
 
@@ -39,13 +50,12 @@
 - ai: 악센트 비구분
 - ci: 대소문자 구분
 
-### 대소문자 구분을 위해 utf864b_bin을 사용
+### 대소문자 구분을 위해 path collation utf864b_bin으로 변경해서 사용
 - 0-9 < A-Z < a-z
 
 
 ### Backawrd index scan
 - 인덱스를 역순으로 스캔하는 것으로 인덱스 트리 leaf node 간에 연결된 양방향 포인터를 활용한다
-
 
 
 ## 댓글 수 테이블 (article_comment_count)

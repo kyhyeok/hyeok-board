@@ -39,8 +39,8 @@
 ## 데이터베이스 생성 (백업용)
 - create database article_view;
 
-## 게시글 테이블 (article_view_count)
-| 컬럼명        | 데이터 타입        | 설명 / 제약조건              |
+## 게시글 뷰 테이블 (article_view_count)
+| 컬럼명        | 데이터 타입        | 설명 / 제약조건         |
 |------------|---------------|------------------------|
 | article_id | BIGINT        | Primary Key(Shard Key) |
 | view_count | BIGINT        | 조회수                    |
