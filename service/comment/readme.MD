@@ -1,5 +1,5 @@
 ## 데이터베이스 생성
-- create database article;
+- create database comment;
 
 ## 게시글 테이블 (comment)
 | 컬럼명               | 데이터 타입        | 설명 / 제약조건     |
