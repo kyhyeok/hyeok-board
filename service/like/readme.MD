@@ -80,3 +80,13 @@
 - version
   - count: 349, 소요 시간 6,118ms
   - 낙관적 락의 count는 동시요청이 들어올 떄 충돌 감지 이후 롤백으로 인해 동시요청이 많으면 실패하는 케이스가 많아서 count가 적게 나옴
+
+
+## outbox 테이블 (outbox)
+| 컬럼명        | 데이터 타입        | 설명 / 제약조건   |
+|------------|---------------|-------------|
+| outbox_id  | BIGINT        | Primary Key |
+| event_type | varchar(100)  | 이벤트 타입      |
+| payload    | varchar(5000) | 이벤트 데이터     |
+| shard_key  | BIGINT        | 샤드 키        |
+| created_at | DATETIME      | 생성일시        |

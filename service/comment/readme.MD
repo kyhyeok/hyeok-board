@@ -63,3 +63,13 @@
 |---------------|---------------|------------------------|
 | article_id    | BIGINT        | Primary Key(Shard Key) |
 | comment_count | BIGINT        | 댓글 수                   |
+
+
+## outbox 테이블 (outbox)
+| 컬럼명        | 데이터 타입        | 설명 / 제약조건   |
+|------------|---------------|-------------|
+| outbox_id  | BIGINT        | Primary Key |
+| event_type | varchar(100)  | 이벤트 타입      |
+| payload    | varchar(5000) | 이벤트 데이터     |
+| shard_key  | BIGINT        | 샤드 키        |
+| created_at | DATETIME      | 생성일시        |
