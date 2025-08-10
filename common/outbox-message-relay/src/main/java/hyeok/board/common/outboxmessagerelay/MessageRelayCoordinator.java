@@ -28,7 +28,7 @@ public class MessageRelayCoordinator {
 
     private final int PING_FAILURE_THRESHOLD = 3;
 
-    public AssignedShard assignedShard() {
+    public AssignedShard assignedShards() {
         return AssignedShard.of(APP_ID, findAppIds(), MessageRelayConstants.SHARD_COUNT);
     }
 

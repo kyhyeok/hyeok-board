@@ -25,6 +25,6 @@ public class OutboxEventPublisher {
                 shardKey % MessageRelayConstants.SHARD_COUNT
         );
 
-        applicationEventPublisher.publishEvent(OutboxEvent.from(outbox));
+        applicationEventPublisher.publishEvent(OutboxEvent.of(outbox));
     }
 }

@@ -41,7 +41,7 @@ public class MessageRelayConfig {
         executor.setCorePoolSize(20);
         executor.setMaxPoolSize(50);
         executor.setQueueCapacity(100);
-        executor.setThreadNamePrefix("mr-pub-event--");
+        executor.setThreadNamePrefix("mr-pub-event-");
         return executor;
     }
 
