@@ -52,7 +52,7 @@ public class HotArticleListRepository {
                 .reverseRangeWithScores(generateKey(dateStr), 0, -1)
                 .stream()
                 .peek(tuple ->
-                        log.info("[HotARticleListRepository.readAll] articleId={}, score={}"
+                        log.info("[HotArticleListRepository.readAll] articleId={}, score={}"
                                 , tuple.getValue(), tuple.getScore()))
                 .map(ZSetOperations.TypedTuple::getValue)
                 .map(Long::valueOf)
