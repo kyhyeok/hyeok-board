@@ -3,7 +3,6 @@ package hyeok.board.articleread.service.event.handler;
 import hyeok.board.articleread.repository.ArticleQueryModelRepository;
 import hyeok.board.common.event.Event;
 import hyeok.board.common.event.EventType;
-import hyeok.board.common.event.payload.CommentCreatedEventPayload;
 import hyeok.board.common.event.payload.CommentDeletedEventPayload;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

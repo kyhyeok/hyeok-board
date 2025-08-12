@@ -17,7 +17,7 @@ spring:
 endpoints:
   hyeok-board-article-service:
     url: http://127.0.0.1:9000
-  hyeok-board-command-service:
+  hyeok-board-comment-service:
     url: http://127.0.0.1:9001
   hyeok-board-like-service:
     url: http://127.0.0.1:9002
