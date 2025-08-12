@@ -19,7 +19,8 @@ public class CacheConfig {
         return RedisCacheManager.builder(connectionFactory)
                 .withInitialCacheConfigurations(
                         Map.of(
-                                "articleViewCount", RedisCacheConfiguration.defaultCacheConfig().entryTtl(ofSeconds(1))
+                                "articleViewCount",
+                                RedisCacheConfiguration.defaultCacheConfig().entryTtl(ofSeconds(1))
                         )
                 ).build();
     }
