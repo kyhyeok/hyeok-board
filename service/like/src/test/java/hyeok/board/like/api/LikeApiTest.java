@@ -82,7 +82,7 @@ public class LikeApiTest {
         System.out.println(lockType + " end");
 
         Long count = restClient.get()
-                .uri("/v1/article-likes/articles/{articleId}/users/count", articleId)
+                .uri("/v1/article-likes/articles/{articleId}/count", articleId)
                 .retrieve()
                 .body(Long.class);
 
