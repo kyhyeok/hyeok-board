@@ -18,7 +18,7 @@ public class BoardArticleCountRepository {
 
     public Long read(Long boardId) {
         String result = redisTemplate.opsForValue().get(generateKey(boardId));
-        return result == null ? 0 : Long.valueOf(result);
+        return result == null ? 0L : Long.valueOf(result);
     }
 
     private String generateKey(Long boardId) {

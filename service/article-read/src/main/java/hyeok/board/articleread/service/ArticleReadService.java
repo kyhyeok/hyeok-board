@@ -40,7 +40,7 @@ public class ArticleReadService {
 
     private final ArticleIdListRepository articleIdListRepository;
 
-    private BoardArticleCountRepository boardArticleCountRepository;
+    private final BoardArticleCountRepository boardArticleCountRepository;
 
     private final List<EventHandler> eventHandlers;
 
